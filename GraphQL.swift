@@ -433,10 +433,10 @@ class GraphQLFetcher {
   
   fileprivate func placeQuery(country: String, minimumPopulation: Int) -> GraphQLQuery {
     
+    // search part
     let match1 = GraphQLMatch(attribute: "country", op: .equals, value: country)
     let match2 = GraphQLMatch(attribute: "population", op: .greaterThan, value: String(minimumPopulation)) // everything's a string
     
-    // search part
     let search = GraphQLSearch(resource: "PLACES", matches: [match1, match2])
     
     // schema part
@@ -450,6 +450,7 @@ class GraphQLFetcher {
         ])
       ])
     
+    // search + schema => query
     let query = GraphQLQuery(name: "place", search: search, schema: schema)
     
     return query
